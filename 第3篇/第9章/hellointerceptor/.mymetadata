@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="hellointerceptor"
+  id="myeclipse.1309526477296"
+  context-root="/hellointerceptor"
+  j2ee-spec="5.0"
+  archive="hellointerceptor.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

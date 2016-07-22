@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="oneaction"
+  id="myeclipse.1310402822406"
+  context-root="/oneaction"
+  j2ee-spec="5.0"
+  archive="oneaction.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

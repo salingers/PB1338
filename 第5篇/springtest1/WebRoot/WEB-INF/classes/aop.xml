@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"	
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- 組態建立UserDAOImpl的案例 -->
+	<bean id="userDAO" class="com.springtest1.dao.UserDAOImpl">	 
+	</bean>
+	<!-- 組態建立UserBizImpl的案例 -->
+	<bean id="userBiz" class="com.springtest1.biz.UserBizImpl">
+	  <!-- 相依植入資料存取層元件 -->
+	  <property name="userDAO" ref="userDAO" />
+	</bean>	
+		
+	<!-- 定義日志知會，將日志切面交給Spring容器管理 -->
+	<bean id="allLogAdvice" class="com.springtest1.aop.AllLogAdvice"></bean>	
+	<!-- 進行aop組態 -->
+	<aop:config>	
+	  <!-- 組態日志切面 -->
+	  <aop:aspect id="logaop" ref="allLogAdvice">	 	  
+	    <!-- 
+	             定義切入點，切入點采用正規表示法execution(* com.springtest1.biz.UserBiz.*(..))，
+	             含義是對com.springtest1.biz.UserBiz中的所有方法，都進行攔截 
+	    -->   
+	    <aop:pointcut id="logpointcut" expression="execution(* com.springtest1.biz.UserBiz.*(..))" />
+	    
+	    <!-- 將LogAdvice日志知會中的myBeforeAdvice方法指定為前置知會 -->
+	    <aop:before method="myBeforeAdvice" pointcut-ref="logpointcut"/>
+	    
+	    <!-- 將LogAdvice日志知會中的myAfterReturnAdvice方法指定為後置知會 -->
+	    <aop:after-returning method="myAfterReturnAdvice" pointcut-ref="logpointcut"/>
+	    
+	    <!-- 將LogAdvice日志知會中的方法指定為例外知會 -->
+	    <aop:after-throwing method="myThrowingAdvice" pointcut-ref="logpointcut" throwing="e" />
+	    
+	    <!-- 將LogAdvice日志知會中的方法指定為環繞知會 -->
+	    <aop:around method="myAroundAdvice" pointcut-ref="logpointcut"/>
+	  </aop:aspect>
+	</aop:config>
+	
+</beans>

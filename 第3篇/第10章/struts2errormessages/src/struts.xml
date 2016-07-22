@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.custom.i18n.resources" value="errormessages"></constant>
+	<package name="struts2errormessages" extends="struts-default">
+		<action name="yanzheng" class="action.Struts2YanZheng">
+			<result name="input">/index.jsp</result>
+			<result name="success">/success.jsp</result>
+		</action>
+	</package>
+</struts>    

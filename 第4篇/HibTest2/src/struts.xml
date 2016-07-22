@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+  <package name="default" extends="struts-default">
+    <!-- 定義dolgon的Action，該Action的實現類別為 com.hibtest2.action.UserManagerAction-->
+	<action name="doLogin" class="com.hibtest2.action.UserManagerAction">	
+	<!-- 定義處理結果和資源之間的映射關系 -->
+	<result name="error">error.jsp</result>
+	<result name="success">success.jsp</result>
+	</action>
+</package>
+</struts>    

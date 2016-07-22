@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="friend" extends="struts-default">
+		<action name="regaction" class="action.RegAction">
+			<result name="success">/regsuccess.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+		<action name="loginaction" class="action.LoginAction">
+			<result name="success">/index.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		<action name="friendinfoaction" class="action.FriendInfoAction">
+			<result name="success">/friendinfo.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="messageaction" class="action.MessageAction">
+			<result name="success">/message.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="savemessageaction" class="action.MessageAction"
+			method="saveMessage">
+			<result name="success">/savemessageok.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="allmessageaction" class="action.MessageAction"
+			method="allMessage">
+			<result name="success">/allmessagelist.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="allfriendaction" class="action.FriendInfoAction"
+			method="allFriend">
+			<result name="success">/allfriendlist.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="selectfriendaction" class="action.AddFriendAction">
+			<result name="success">/selectuser.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="addfriendaction" class="action.AddFriendAction"
+			method="addFriend">
+			<result name="success">/addfriendok.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+		<action name="exitaction" class="action.ExitAction">
+			<result name="success">/login.jsp</result>
+			<result name="login">/friendinfoerror.jsp</result>
+		</action>
+	</package>
+</struts>    

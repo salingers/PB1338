@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+    
+    <!-- <include file="struts-file.xml"/> -->
+    <include file ="struts-default.xml" />       
+    
+     <!-- 定義一個名稱為admin的包，繼承struts 2的預設包，指定命名空間為"/admin" -->
+     <package name="admin" namespace="/admin" extends="struts-default">
+        <!-- 使用通配符與動態值組態AdminAction -->
+   		<action name="*" class="admin" method="{1}">
+    		<result name="login">/login.jsp</result>
+    		<result name="users">/admin/users.jsp</result>
+    		<result name="add">/admin/add.jsp</result>
+    		<result name="input">/message.jsp</result>
+    		<result name="message">/message.jsp</result>
+    		<!-- 將請求重導至別的Action，相當於重新發起一次請求，並攜帶請求參數 -->
+    		<result name="list" type="redirectAction">
+    			<param name="actionName">listUsers</param>
+    			<param name="status.id">${status.id}</param>
+    		</result>
+    		<!--  <interceptor-ref name="adminStack"/>-->
+    	</action>
+    	<!--  
+    	<action name="add" class="admin" method="add">
+    		<result name="input">/admin/add.jsp</result>
+    	</action>
+    	-->
+    	<!-- 為AdminAction類別中login方法組態映射 -->
+    	<action name="login" class="admin" method="login">
+    		<result name="success" >manage.jsp</result>
+    		<result name="input">/login.jsp</result>
+    	</action>
+     </package>
+    
+	<!-- 定義一個名稱為user的包，繼承struts 2的預設包，指定命名空間為"/user" -->
+	<package name="user" namespace="/user" extends="struts-default">
+	    <!-- 使用通配符實現動態方法呼叫 -->
+		<action name="user_*" class="user" method="{1}">
+			<result name="success">/index.jsp</result>
+			<result name="login">/login.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<!-- 為UserAction類別中的changepwd方法組態映射 -->
+		<action name="changepwd" class="user" method="changepwd">
+			<result name="input">/changepwd.jsp</result>
+			<result name="message">/message.jsp</result>
+			<!--<interceptor-ref name="roleStack"/>-->
+		</action>
+	</package>
+    
+    
+    <!-- 定義一個名稱為transaction的包，繼承struts 2的預設包，指定命名空間為"/transaction" -->
+    <package name="transaction" namespace="/transaction" extends="struts-default">
+    	<!--<default-interceptor-ref name="roleStack"/>-->
+    	<!-- 為Transaction類別中list方法組態映射 -->
+   		<action name="list" class="transaction" method="list">
+    		<result name="success">/transactionlog.jsp</result>
+    	</action>
+    	<!-- 為Transaction類別中transfer方法組態映射 -->
+   		<action name="transfer" class="transaction" method="transfer">
+    		<result name="input">/transfer.jsp</result>
+    		<result name="message">/message.jsp</result>
+    	</action>
+    	<!-- 為Transaction類別中deposit方法組態映射 -->
+		<action name="deposit" class="transaction" method="deposit">
+		    <result name="input">/deposit.jsp</result>
+		    <result name="message">/message.jsp</result>
+    	</action>
+    	<!-- 為Transaction類別中withdrawal方法組態映射 -->
+    	<action name="withdrawal" class="transaction" method="withdrawal">
+		<result name="input">/withdrawal.jsp</result>
+		<result name="message">/message.jsp</result>
+    	</action>
+    </package>
+    
+      <!-- 定義一個名稱為info的包，繼承struts 2的預設包，指定命名空間為"/info" -->
+      <package name="info" namespace="/info" extends="struts-default">
+      	<!--  <default-interceptor-ref name="roleStack"/>-->
+      	<!-- 使用通配符實現動態方法呼叫 -->
+   		<action name="info_*" class="personinfo" method="{1}">
+    		<result name="login">/login.jsp</result>
+    		<result name="input">/modify.jsp</result>
+    		<result name="message">/message.jsp</result>
+    		<!--<interceptor-ref name="roleStack"/>-->
+    	</action>
+    </package>
+</struts>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+   <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	
+   <!-- 定义一个名称为user的包，继承struts 2的默认包，指定命名空间为"/user" -->
+<package name="user" namespace="/user" extends="struts-default">
+    <!-- 为UserAction类的addUser方法配置映射 -->	   
+	<action name="addUser" class="user" method="addUser">
+		<result type="redirect" name="success">/index.jsp</result>
+		<result name="login">/login.jsp</result>
+		<result name="input">/login.jsp</result>			
+	</action>
+	<!-- 为UserAction类的login方法配置映射 -->			
+	<action name="doLogin" class="user" method="login">
+		<result type="redirect" name="index">/index.jsp</result>
+	</action>
+	<!-- 为UserAction类的changePwd方法配置映射 -->	
+	<action name="changePwd" class="user" method="changePwd">
+		<result type="redirect" name="success">/index.jsp</result>
+	</action>	
+	<!-- 为UserAction类的login方法配置映射 -->
+	<action name="loginout" class="user" method="loginout">			
+		<result type="redirect" name="index">/index.jsp</result>		
+	</action>
+</package>
+	
+<!-- 定义一个名称为goods的包，继承struts 2的默认包，指定命名空间为"/goods" -->
+<package name="goods" namespace="/goods" extends="struts-default">	
+    <!-- 为GoodsAction类中的toOnSaleGoodsList方法配置映射 -->
+	<action name="toOnSaleGoodsList" class="goods" method="toOnSaleGoodsList">
+		<result name="onSaleGoodsList">/on_sale_goodslist.jsp</result>					
+	</action>
+	<!-- 为GoodsAction类中的toMyGoods方法配置映射 -->
+	<action name="toMyGoods" class="goods" method="toMyGoods">
+		<result name="mygoods">/mygoods.jsp</result>					
+	</action>	
+	<!-- 为GoodsAction类中的doBid方法配置映射 -->
+	<action name="doBid" class="goods" method="doBid">
+		<result name="goodsbid">/goods_bid.jsp</result>					
+	</action>	
+	<!-- 为GoodsAction类中的toAddGoodsInfo方法配置映射 -->
+	<action name="toAddGoodsInfo" class="goods" method="toAddGoodsInfo">
+		<result type="redirect" name="index">/index.jsp</result>					
+	</action>
+</package>
+	
+<!-- 定义一个名称为bid的包，继承struts 2的默认包，指定命名空间为"/bid" -->
+<package name="bid" namespace="/bid" extends="struts-default">	
+   	<!-- 为BidAction类中的doSubmitBid方法配置映射 -->	
+	<action name="doSubmitBid" class="bid" method="doSubmitBid">
+	    <result type="redirect" name="index">/index.jsp</result>						
+	</action>
+	<!-- 为BidAction类中的doDeal方法配置映射 -->	
+	<action name="doDeal" class="bid" method="doDeal">
+	    <result type="redirect" name="index">/index.jsp</result>						
+	</action>
+</package>
+	
+	<!-- 定义一个名称为com的包，继承struts 2的默认包 -->
+	<package name="com" extends="struts-default">         
+	    <action name="upload" class="upload">  
+	        <result type="redirect" name="success">/goodsinfo.jsp</result> 
+	    </action>     
+	</package> 
+</struts>    

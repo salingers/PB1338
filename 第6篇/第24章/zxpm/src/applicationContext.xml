@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	">
+
+    <!-- 声明事务管理器 -->
+	<bean id="myHibTxManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean> 
+	
+	<!-- 定义事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="myHibTxManager">
+		<tx:attributes>
+			<!-- 对get/load/search开头的方法要求只读事务 -->
+			<tx:method name="get*" propagation="SUPPORTS"
+				read-only="true" />
+			<tx:method name="load*" propagation="SUPPORTS"
+				read-only="true" />
+			<tx:method name="search*" propagation="SUPPORTS"
+				read-only="true" />
+			<!-- 对其它方法要求事务 -->
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!--定义切面，并将事务通知和切面组合（定义哪些方法应用事务规则） -->
+	<aop:config>
+	    <!-- 定义一个事务切面，对com.zxpm.biz包下的所有类的所有方法 都应用事务规则 -->
+		<aop:pointcut id="bizMethods"
+			expression="execution(* com.zxpm.biz.*.*(..))" />
+		<!-- 织入 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="bizMethods" />
+	</aop:config>
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/zxpm"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/zxpm/entity/Bid.hbm.xml</value>
+				<value>com/zxpm/entity/Users.hbm.xml</value>
+				<value>com/zxpm/entity/Goods.hbm.xml</value></list>
+		</property>
+	</bean>
+	
+	<!-- 定义UserDAOImpl类-->
+	<bean id="userDAO"  class="com.zxpm.dao.impl.UserDAOImpl">
+	  <property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	<!-- 定义GoodsDAOImpl类-->
+	<bean id="goodsDAO"  class="com.zxpm.dao.impl.GoodsDAOImpl">
+	  <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 定义BidDAOImpl类-->
+	<bean id="bidDAO"  class="com.zxpm.dao.impl.BidDAOImpl">
+	  <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 定义UserBizImpl类,并为其属性userDAO注入值-->
+	<bean id="userBiz"  class="com.zxpm.biz.impl.UserBizImpl">
+	  <property name="userDAO" ref="userDAO" />
+	</bean>
+	<!-- 定义GoodsBizImpl类,并为其属性goodsDAO注入值-->
+	<bean id="goodsBiz"  class="com.zxpm.biz.impl.GoodsBizImpl">
+	  <property name="goodsDAO" ref="goodsDAO" />
+	</bean>
+	<!-- 定义BidBizImpl类,并为其属性bidDAO注入值-->
+	<bean id="bidBiz"  class="com.zxpm.biz.impl.BidBizImpl">
+	  <property name="bidDAO" ref="bidDAO" />
+	</bean>
+	
+	<!-- 定义UserAction，并为其属性userBiz注入值 -->
+	<bean name="user" class="com.zxpm.action.UserAction" scope="prototype">	  
+	    <property name="userBiz" ref="userBiz" />
+	</bean>
+	<!-- 定义GoodsAction，并为其属性goodsBiz注入值 -->
+	<bean name="goods" class="com.zxpm.action.GoodsAction" scope="prototype">	  
+	    <property name="goodsBiz" ref="goodsBiz" />
+	</bean>
+	<!-- 定义BidAction，并为其属性goodsBiz、bidBiz、userBiz注入值 -->
+	<bean name="bid" class="com.zxpm.action.BidAction" scope="prototype">	  
+	    <property name="goodsBiz" ref="goodsBiz" />
+	    <property name="bidBiz" ref="bidBiz" />
+	    <property name="userBiz" ref="userBiz" />
+	</bean>
+	
+	<!-- 定义FileUploadAction -->
+	<bean name="upload" class="com.zxpm.action.FileUploadAction" scope="prototype">	  	   
+	</bean>
+	
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="hw" class="com.springtest1.HelloWorld">   
+	</bean>
+	<!-- 組態建立UserDAOImpl的案例 -->
+	<bean id="userDAO" class="com.springtest1.dao.UserDAOImpl">	 
+	</bean>
+	<!-- 組態建立UserBizImpl的案例 -->
+	<bean id="userBiz" class="com.springtest1.biz.UserBizImpl">
+	  <!-- 相依植入資料存取層元件 -->
+	  <property name="userDAO" ref="userDAO" />
+	</bean>	
+		
+	<!-- 定義前置知會 -->
+	<bean id="logAdvice" class="com.springtest1.aop.LogAdvice"></bean>
+	
+	<!-- 定義後置知會 -->
+	<bean id="afterLogAdvice" class="com.springtest1.aop.AfterLogAdvice"></bean>
+	
+	<!-- 定義例外知會 -->
+	<bean id="throwsLogAdvice" class="com.springtest1.aop.ThrowsLogAdvice"></bean>
+	
+	<!-- 定義環繞知會 -->
+	<bean id="logAroundAdvice" class="com.springtest1.aop.LogAroundAdvice"></bean>
+	
+	<!-- 定義代理類別，名 稱為ub，將透過ub存取業務類別中的方法 -->
+	<bean id="ub" class="org.springframework.aop.framework.ProxyFactoryBean">
+	  <property name="proxyInterfaces">
+	    <value>com.springtest1.biz.UserBiz</value>
+	  </property>
+	  <property name="interceptorNames">
+	    <list>	     
+	     <value>logAdvice</value>	   
+	     <!-- 織入後置知會 -->
+	     <value>afterLogAdvice</value>
+	     <!-- 織入例外知會 -->
+	     <value>throwsLogAdvice</value>
+	     <!-- 織入環繞知會 -->
+	     <value>logAroundAdvice</value>
+	    </list>
+	  </property>
+	  <property name="target" ref="userBiz"></property>
+	</bean>
+	
+	
+	
+</beans>

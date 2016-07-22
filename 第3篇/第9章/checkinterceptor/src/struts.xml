@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="hellointerceptor" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.inter.CheckInterceptor"></interceptor>
+		</interceptors>
+
+		<action name="login" class="com.action.UserAction">
+			<result name="error">/login.jsp</result>
+			<result name="success">/loginsuccess.jsp</result>
+		</action>
+		<action name="chakan">
+			<result>/info.jsp</result>
+			<result name="login">/login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+		</action>
+	</package>
+</struts>    
