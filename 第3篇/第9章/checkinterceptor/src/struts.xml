@@ -10,6 +10,7 @@
 			<result name="error">/login.jsp</result>
 			<result name="success">/loginsuccess.jsp</result>
 		</action>
+
 		<action name="chakan">
 			<result>/info.jsp</result>
 			<result name="login">/login.jsp</result>

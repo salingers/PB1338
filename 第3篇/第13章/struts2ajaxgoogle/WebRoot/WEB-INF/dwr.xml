@@ -4,7 +4,7 @@
 	<allow>
 		<create creator="new" javascript="KeyWrod">
 			<param name="class" value="action.KeyAction" />
-			<include method="getName"/>
+			<include method="getName" />
 		</create>
 	</allow>
 </dwr>  

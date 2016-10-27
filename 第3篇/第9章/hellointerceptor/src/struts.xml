@@ -8,13 +8,14 @@
 		</interceptors>
 
 		<action name="helloaction" class="com.action.HelloAction">
-			<result name="success">/success.jsp</result>
 			<result name="input">/reg.jsp</result>
+			<result name="success">/success.jsp</result>
+
 
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<interceptor-ref name="helloInterceptor">
 			</interceptor-ref>
 		</action>
-		
+
 	</package>
 </struts>    

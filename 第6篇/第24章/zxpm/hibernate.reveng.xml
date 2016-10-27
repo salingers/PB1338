@@ -12,9 +12,9 @@
 			<generator class="native"></generator>
 		</primary-key>
 	</table>
-<table name="users" catalog="zxpm">
-	<primary-key>
-		<generator class="native"></generator>
-	</primary-key>
-</table>
+	<table name="users" catalog="zxpm">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
 </hibernate-reverse-engineering>

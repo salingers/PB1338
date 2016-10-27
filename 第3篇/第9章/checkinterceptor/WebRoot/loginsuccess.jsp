@@ -2,11 +2,12 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <title>膁篒竟舦北</title>
-  </head>
-  
-  <body>
-	Θ祅╰参<a href=chakan.action>珆珆^_^</a>
-  </body>
+<head>
+<title>膁篒竟舦北</title>
+</head>
+
+<body>
+	Θ祅╰参
+	<a href=chakan.action>珆珆^_^</a>
+</body>
 </html>

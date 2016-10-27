@@ -4,5 +4,18 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.struts2.MYECLIPSE_STRUTS21_CORE"/>
+	<classpathentry kind="lib" path="C:/Users/167174/.m2/repository/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+			<attribute name="maven.groupId" value="javax.servlet"/>
+			<attribute name="maven.artifactId" value="javax.servlet-api"/>
+			<attribute name="maven.version" value="3.1.0"/>
+			<attribute name="maven.scope" value="provided"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/struts2login/WebRoot/WEB-INF/lib/struts2-core-2.0.14.jar"/>
+	<classpathentry kind="lib" path="/springtest1/WebRoot/WEB-INF/lib/spring-webmvc-struts.jar"/>
+	<classpathentry kind="lib" path="/ssh2test1/WebRoot/WEB-INF/lib/spring-webmvc-struts.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

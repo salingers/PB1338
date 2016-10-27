@@ -7,7 +7,6 @@
 	</head>
 
 	<body>
-		<h1>使用者登錄</h1>
 		<s:form id="id" action="helloaction">
 			<s:textfield name="username" label="使用者名稱"></s:textfield>
 			<s:password name="pass1" label="密碼"></s:password>

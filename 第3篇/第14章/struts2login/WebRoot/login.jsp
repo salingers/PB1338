@@ -18,6 +18,7 @@
 			<s:form action="login" method="post">
 				<s:textfield name="username" label="½ã¸¹"></s:textfield>
 				<s:password name="password" label="±K½X"></s:password>
+				
 				<s:submit value="µn³°"></s:submit>
 			</s:form>
 		</div>

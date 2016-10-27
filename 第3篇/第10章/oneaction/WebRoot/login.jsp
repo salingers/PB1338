@@ -10,6 +10,7 @@
   	<s:form action="login">
   		<s:textfield name="user" label="使用者名稱"></s:textfield>
   		<s:password name="pass" label="密碼框"></s:password>
+  		
   		<s:submit value="登入"></s:submit>
   	</s:form>
   </body>

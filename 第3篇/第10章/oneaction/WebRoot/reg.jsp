@@ -12,6 +12,7 @@
 			<s:textfield name="age" label="¦~ÄÖ"></s:textfield>
 			<s:password name="pass1" label="±K½X®Ø"></s:password>
 			<s:password name="pass2" label="­«´_±K½X"></s:password>
+			
 			<s:submit value="µn¿ý"></s:submit>
 		</s:form>
 	</body>

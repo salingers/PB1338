@@ -1,7 +1,8 @@
 create database post;
 
 create table post
-( postId int  AUTO_INCREMENT PRIMARY KEY ,
-  postTitle varchar(100),
-  postContent varchar(200)
+( 
+	postId int  AUTO_INCREMENT PRIMARY KEY 
+	, postTitle varchar(100)
+	, postContent varchar(200)
 );
