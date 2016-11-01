@@ -10,7 +10,7 @@
 	<s:form action="yanzheng.action" validate="true">
 		<s:textfield name="user" label="使用者"></s:textfield>
 		<s:password name="pass" label="密碼"></s:password>
-		
+
 		<s:submit value="傳送"></s:submit>
 	</s:form>
 </body>
